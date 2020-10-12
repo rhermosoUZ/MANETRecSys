@@ -4,10 +4,10 @@
 
   <skipIfNotSupported/>
   
-  <programGroup defaultName="manetsimulation" location="StartMenu"/>
+  <programGroup defaultName="MANETRecSys" location="StartMenu"/>
   
   <shortcut
-     name="manetsimulation"
+     name="MANETRecSys"
      programGroup="yes"
      desktop="no"
      applications="no"
@@ -17,7 +17,7 @@
      commandLine=""
      workingDirectory="$INSTALL_PATH"
      description="Model"
-     iconFile="$INSTALL_PATH\manetsimulation\icons\model.bmp"
+     iconFile="$INSTALL_PATH\MANETRecSys\icons\model.bmp"
      iconIndex="0"
      initialState="noShow">
      <createForPack name="Model"/>
@@ -30,7 +30,7 @@
      applications="no"
      startMenu="no"
      startup="no"
-     target="$INSTALL_PATH\manetsimulation\docs\index.html"
+     target="$INSTALL_PATH\MANETRecSys\docs\index.html"
      commandLine=""
 	 iconFile="%SystemRoot%\system32\SHELL32.dll"
      iconIndex="23" 
@@ -40,7 +40,7 @@
   </shortcut>
   
   <shortcut
-     name="manetsimulation Uninstaller"
+     name="MANETRecSys Uninstaller"
      programGroup="yes"
      desktop="no"
      applications="no"
