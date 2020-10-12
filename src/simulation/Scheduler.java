@@ -50,7 +50,7 @@ public class Scheduler {
 		// terminating simulation:
 		if (this.simulationIsTerminated) {   				// is set in this.unregisterLeftVisitors()
 			for (Visitor v : allVisitorsInSpace) {
-				CSVWriter.saveEvaluatedRecommendations(v);  // -> evaluated_recommendations_of_visitor_<id>.csv  (with errors)
+				CSVWriter.saveEvaluatedRecommendations(v);  // -> evaluated_recommendations_of_visitor_<id>.csv  (with prediction errors)
 			}
 			RunEnvironment.getInstance().endRun();			// stop simulation
 		}
