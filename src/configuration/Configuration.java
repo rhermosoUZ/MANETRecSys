@@ -3,6 +3,7 @@ package configuration;
 public class Configuration {
 	public static int visitorTerminatingSimulation= 70;  // if this visitor leaves then the simulation terminates
 	public static int visitorCapacity= 40;               // maximumNumer of visitors allowed in the space
+	public static int exhibit_count = 25;				 // number of exhibits
 	public static int traceVisitor = 5;  				 // for tracing a certain visitor
 	public static int numberOfExhibits = 30;
 	public static int gridHeight = 25;
