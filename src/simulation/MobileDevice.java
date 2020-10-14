@@ -37,7 +37,7 @@ public class MobileDevice {
 
 	private int visitorID;
 	private final int ttl = Configuration.ttl;
-	private final List<Integer> whomImet = new ArrayList<>();			// for control purposes
+	private final List<Integer> whomImet = new ArrayList<>();			// for control purposes only 
 	
 	private final Map<Integer, EvaluationResult> evaluationResults = new HashMap<>();  // evaluationResults
 	
@@ -106,6 +106,9 @@ public class MobileDevice {
 	}
 
 	public void registerSojournTime(int exhibitId, int sojournTime) {
+		if (this.visitorID == Configuration.traceVisitor) {
+			//System.out.println("####### add sojourn time: ++ vsitorID:" + this.visitorID + " exhibit:" + exhibitId + " sojourmtijme:" + sojournTime);
+		}
 		ownVisits.addSojournTimeOfVisit(exhibitId, sojournTime);
 		GlobalRatings.getInstance().addSojournTime(visitorID, exhibitId, sojournTime);
 	}
@@ -120,24 +123,24 @@ public class MobileDevice {
 		return ownVisits.numberOfVisitedExhibits();
 	}
 
-	public RecommendationResult getRecommendation() {
+	public RecommendationResult calculateRecommendation() {
 
 		RecommendationResult result = null;
 		Map<Integer, UserData> ratingMap = getRatings();  // collected ratings from other visitors met
 		if (this.visitorID == Configuration.traceVisitor)
-			System.out.println("!!!!!!!! size rating map " + ratingMap.size());
+			// System.out.println("!!!!!!!! size rating map " + ratingMap.size());
 		if (hasVisitedEnoughExhibits()) { // see below more than x% items visited
 			DataModel model = new SparseDataModelImpl(ratingMap, Configuration.numberOfExhibits);
 			// getRatings() returns the same data as stored in visitor<id>_<ticks>.csv (=
 			// data of visitors so far met)
-//			if (userID == Visitor.traceVisitor) {
+//			if (this.visitorID == Visitor.traceVisitor) {
 //				System.out.println("[LOCAL PREDICTION MODEL] ");
 //				System.out.println(model);
 //			}
 			List<RecommendationResult> results = ItemBasedRecommender.orderedRecommendations(visitorID, model, 10);
 
 			// print recommendations
-//			if (userID == Visitor.traceVisitor) {
+//			if (this.visitorID == Visitor.traceVisitor) {
 //				System.out.println();
 //				String toPrint = "ordered recommendations):";
 //				for(RecommendationResult r: results) {
@@ -171,7 +174,7 @@ public class MobileDevice {
 	}
 
 	private boolean hasVisitedEnoughExhibits() {
-		int numberOfExhibits = RunEnvironment.getInstance().getParameters().getInteger("exhibit_count");
+		int numberOfExhibits = Configuration.numberOfExhibits;
 		int minNumberOfVisitsForRecommendation = (int) Math.round(numberOfExhibits * 0.0);
 		//return this.visitingOrder.size() > minNumberOfVisitsForRecommendation;
 		return this.ownVisits.numberOfVisitedExhibits() > minNumberOfVisitsForRecommendation;
@@ -191,8 +194,8 @@ public class MobileDevice {
 		DataModel model = new DataModelImpl(norm.zscore(GlobalRatings.getInstance().getMatrix(), visitorID));
 		
 		if (this.visitorID == Visitor.traceVisitor) {
-			System.out.println("[GLOBAL PREDICTION ZSCORE MODEL] for visitor nr:" + this.visitorID);
-			System.out.println(model);   // seems to take the correct data
+			//System.out.println("[GLOBAL PREDICTION ZSCORE MODEL] for visitor nr:" + this.visitorID);
+			//System.out.println(model);   // seems to take the correct data
 		} 		
 		return ItemBasedRecommender.recommendationFor(visitorID, itemID, model);
 	}
@@ -217,7 +220,7 @@ public class MobileDevice {
 
 		// put in ratings:
 		// getUserRatings() returns Map with:
-		// key = userID value = map of recommendations: (key: exhibitID value:zscore)
+		// key = userID value = map of recommendations: (key: exhibitID, value:zscore)
 		// i.e. all ratings of the user with this userID
 		UserData temp = new UserData(visitorID, getUserRatings());
 		// put the own ratings of this user into the ratings-map:
@@ -290,9 +293,9 @@ public class MobileDevice {
 	}
 
 	public double[][] getSojournTimeMatrix() {
-		Set<Integer> visitorsId = collectedSojournTimes.keySet();
+		Set<Integer> visitorsIds = collectedSojournTimes.keySet();
 
-		int highestVisitorId = visitorsId.stream().max(Comparator.naturalOrder()).orElse(0);
+		int highestVisitorId = visitorsIds.stream().max(Comparator.naturalOrder()).orElse(0);
 
 		if (visitorID > highestVisitorId) {
 			highestVisitorId = visitorID;
@@ -328,7 +331,8 @@ public class MobileDevice {
 			metWith += " - " + v;
 		}
 		if (this.visitorID == Visitor.traceVisitor && Configuration.printRecommendationResults)
-			System.out.println("[MET " + this.visitorID + " has met at tick:" + tick + " with " + metWith);
+			//System.out.println( "[#ALL VISITORS]:" + Visitor.idCounter + "   [MET " + this.visitorID  + " with " + whomImet.size() + " has met at tick:" + tick + " with " + whomImet.size() + " visitors:" + metWith);
+			System.out.println( "[#ALL VISITORS]:" + Visitor.idCounter + "   [MET with "  + whomImet.size() + " visitors:" + metWith + "   --- at tick: " + tick);
 	}
 	
 	public Map<Integer, EvaluationResult> getEvaluationResults() {

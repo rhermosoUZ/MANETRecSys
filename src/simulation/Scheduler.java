@@ -87,7 +87,7 @@ public class Scheduler {
 				if (Configuration.printLeave)
 					System.out.println("[LEAVE] Visitor " + v.id());
 				if (v.id() == Configuration.traceVisitor) {
-					v.getMobileDevice().getOwnVisits().printSojournTimesOfVisitors();
+					v.getMobileDevice().getOwnVisits().printSojournTimesOfVisitors();  // print data of all visits of traceVisitor
 				}
 				// !!!! check if simulation should terminate:
 				if (v.id() == Configuration.visitorTerminatingSimulation)

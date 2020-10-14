@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 public class EvaluationResult {
 	private final int userID;
 	private final int itemID;
-	private final int localPrediction;
-	private final LocalDateTime recommendationTimestamp;
 	private int measuredSojournTime;
-	private final double tick;
-	private final int randomPrediction;
+	private final int localPrediction;
 	private final int globalPrediction;
+	private final int randomPrediction;
 	private boolean isRandomRecommendation = true;
+	private final double tick;
+	private final LocalDateTime recommendationTimestamp;
 	
 
 	public EvaluationResult(int userID, int itemID, int prediction, int randomPrediction, int globalPrediction, double tick, LocalDateTime timestamp, boolean _isRandom) {
@@ -76,10 +76,15 @@ public class EvaluationResult {
 	
 	@Override
 	public String toString() {
-		return "EvaluationResult [userID=" + userID + ", itemID=" + itemID + ", localPrediction=" + localPrediction
-				+ ", recommendationTimestamp=" + recommendationTimestamp + ", measuredSojournTime="
-				+ measuredSojournTime + ", tick=" + tick + ", randomPrediction=" + randomPrediction
-				+ ", globalPrediction=" + globalPrediction + ", is RandomRec  " + this.isRandomRecommendation() + "]";
+		return "EvaluationResult [userID=" + userID + ", itemID=" + itemID 
+				+ ", tick=" + tick 
+				+ ", measuredSojournTime=" + measuredSojournTime 
+				+ ", localPrediction=" + localPrediction
+				+ ", globalPrediction=" + globalPrediction 
+				+ ", randomPrediction=" + randomPrediction
+				//+ ", recommendationTimestamp=" + recommendationTimestamp 
+				//+ ", is RandomRec  " + this.isRandomRecommendation() + "]"
+				;
 	}
 
 	

@@ -10,6 +10,7 @@ import utils.SojournTimeData;
 
 public class OwnVisits {
 	private int uid;
+	
 	// key = exhibitID
 	// SojournTime = sojourntime + timestamp
 	private final Map<Integer, SojournTimeData> sojournTimesAtExhibits = new HashMap<>();

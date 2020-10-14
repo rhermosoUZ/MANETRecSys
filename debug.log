@@ -766,3 +766,50 @@ java.lang.NullPointerException
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
 	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+FATAL [Thread-4] 2020-10-12 10:40:20,989 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (13.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at simulation.Scheduler$$FastClassByCGLIB$$fd9abd74.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: repast.simphony.parameter.IllegalParameterException: Parameter 'exhibit_count' not found in the schema.
+	at repast.simphony.parameter.DefaultParameters.getValue(DefaultParameters.java:213)
+	at repast.simphony.parameter.DefaultParameters.getInteger(DefaultParameters.java:242)
+	at simulation.MobileDevice.hasVisitedEnoughExhibits(MobileDevice.java:174)
+	at simulation.MobileDevice.getRecommendation(MobileDevice.java:129)
+	at simulation.Visitor.getNewExhibit(Visitor.java:183)
+	at simulation.Visitor.processStates(Visitor.java:135)
+	at simulation.Visitor.move(Visitor.java:71)
+	at simulation.Scheduler.run(Scheduler.java:42)
+	... 10 more
+FATAL [Thread-4] 2020-10-13 14:55:56,497 repast.simphony.ui.GUIScheduleRunner - RunTimeException when running the schedule
+Current tick (200.0)
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:72)
+	at repast.simphony.engine.controller.ScheduledMethodControllerAction$ScheduleMethodAllAction.execute(ScheduledMethodControllerAction.java:333)
+	at repast.simphony.engine.schedule.DefaultAction.execute(DefaultAction.java:38)
+	at repast.simphony.engine.schedule.ScheduleGroup.executeList(ScheduleGroup.java:205)
+	at repast.simphony.engine.schedule.ScheduleGroup.execute(ScheduleGroup.java:231)
+	at repast.simphony.engine.schedule.Schedule.execute(Schedule.java:352)
+	at repast.simphony.ui.GUIScheduleRunner$ScheduleLoopRunnable.run(GUIScheduleRunner.java:52)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at simulation.Scheduler$$FastClassByCGLIB$$fd9abd74.invoke(<generated>)
+	at net.sf.cglib.reflect.FastMethod.invoke(FastMethod.java:53)
+	at repast.simphony.engine.schedule.DynamicTargetAction.execute(DynamicTargetAction.java:69)
+	... 7 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 0
+	at utils.CSVWriter.save(CSVWriter.java:46)
+	at utils.CSVWriter.saveGlobalSojournTimeMatrix(CSVWriter.java:24)
+	at simulation.Scheduler.run(Scheduler.java:47)
+	... 10 more
